@@ -107,18 +107,26 @@ listPost.forEach( (element,i) => {
 postsList.innerHTML = post;
 
 // prendo btn
-const btn = document.querySelector('.like-button');
+const btn = document.querySelectorAll('.like-button');
 // prendo like
-const likesCounter = document.querySelector('js-likes-counter');
-let like = 0;
+const likesCounter = document.querySelectorAll('.js-likes-counter');
+
+
 // *****EVENTI DINAMICI ***********************************
-btn.addEventListener('click', ()=>{
-    btn.classList.toggle('like-button--liked');
-    listPost.forEach((element,i)=> {
-       like += element[i].likes;
+btn.forEach ((btnCurrent, i)=>{
+    // aggiungo eventListener a ciascun btn
+    btnCurrent.addEventListener('click', () => {
+        // prendo like di ogni post
+        let like = listPost[i].likes;
+        // toggle class liked
+        btnCurrent.classList.toggle('like-button--liked');
+        like ++;
+        // se tolgo la classe liked allora diminuisco 
+        if(!(btnCurrent.classList.contains('like-button--liked'))){
+            like--;
+        }
+        // stampo in pagina
+        likesCounter[i].innerText = like;
     });
+})
 
-    const currentLike = like + 1;
-
-    console.log(currentLike);
-});
