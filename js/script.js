@@ -40,12 +40,12 @@ const newPost = (userElement) => {
            <div class="post__footer">
                <div class="likes js-likes">
                    <div class="likes__cta">
-                      <button class="like-button js-like-button" href="#" data-postid="1">
+                      <button class="like-button js-like-button" href="#" data-postid="${userElement.id}">
                           <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                           <span class="like-button__label">Mi Piace</span>
                        </button>
                   </div>
-                  <div class="likes__counter">Piace a <b id="like-counter-1" class="js-likes-counter">${userElement.likes}</b> persone</div>
+                  <div class="likes__counter">Piace a <b id="like-counter-${userElement.id}" class="js-likes-counter">${userElement.likes}</b> persone</div>
               </div>
           </div>
       </div>
@@ -55,6 +55,7 @@ const newPost = (userElement) => {
 
 // prendo elementi dal dom
 const postsList = document.querySelector('.posts-list');
+
 
 // creo array degli oggetti di ciascun post 
 const listPost = [
@@ -97,9 +98,20 @@ const listPost = [
 ]
 // creo variabile d'appoggio
 let post = '';
+
 //genero post nel feed
-listPost.forEach( element => {
+listPost.forEach( (element,i) => {
     post += newPost(element);
 }); 
 // stampo in pagina
 postsList.innerHTML = post;
+
+// prendo btn
+const btn = document.querySelector('.like-button');
+// prendo like
+
+// *****EVENTI DINAMICI ***********************************
+btn.addEventListener('click', ()=>{
+    btn.classList.toggle('like-button--liked');
+    
+});
