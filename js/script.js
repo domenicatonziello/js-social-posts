@@ -109,9 +109,16 @@ postsList.innerHTML = post;
 // prendo btn
 const btn = document.querySelector('.like-button');
 // prendo like
-
+const likesCounter = document.querySelector('js-likes-counter');
+let like = 0;
 // *****EVENTI DINAMICI ***********************************
 btn.addEventListener('click', ()=>{
     btn.classList.toggle('like-button--liked');
-    
+    listPost.forEach((element,i)=> {
+       like += element[i].likes;
+    });
+
+    const currentLike = like + 1;
+
+    console.log(currentLike);
 });
