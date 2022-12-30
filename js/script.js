@@ -19,6 +19,19 @@ Se clicchiamo sul tasto "Mi Piace" cambiamo il colore al testo del bottone e inc
  3. Al click su un pulsante "Mi Piace" di un post, se abbiamo già cliccato dobbiamo decrementare il contatore e cambiare il colore del bottone.
  */
 // ***********FUNZIONI************************
+const transformDate = (data) => {
+    // creo array con elementi della data
+    const daySplit = data.split('/');
+    // prendo i singoli elementi dall'array
+    const mm = daySplit[0];
+    const gg = daySplit[1];
+    const yyyy = daySplit[2];
+    // formatto la data in formato italiano
+    const formattedDate = `${gg}/${mm}/${yyyy}`;
+    return formattedDate;
+};
+
+
 const newPost = (userElement) => {
     const post = 
     `<div class="post">
@@ -29,7 +42,7 @@ const newPost = (userElement) => {
                   </div>
                   <div class="post-meta__data">
                        <div class="post-meta__author">${userElement.name}</div>
-                       <div class="post-meta__time">${userElement.date}</div>
+                       <div class="post-meta__time">${transformDate(userElement.date)}</div>
                   </div>
                </div>
            </div>
@@ -53,6 +66,8 @@ const newPost = (userElement) => {
     return post;
 }; 
 
+
+
 // prendo elementi dal dom
 const postsList = document.querySelector('.posts-list');
 
@@ -65,7 +80,7 @@ const listPost = [
         profilePicture: 'https://picsum.photos/200',
         date: '12/20/2022',
         text: 'Lorem ipsum dolor sit amet',
-        photo: 'https://unsplash.it/600/300?image=176',
+        photo: '',
         likes: 30
     },
     {
@@ -129,4 +144,3 @@ btn.forEach ((btnCurrent, i)=>{
         likesCounter[i].innerText = like;
     });
 })
-
